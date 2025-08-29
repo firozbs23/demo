@@ -1,14 +1,14 @@
-# Use Eclipse Temurin 21 JDK Alpine image
+# Use official OpenJDK 21 image
 FROM eclipse-temurin:21-jdk-alpine
 
 # Set working directory
 WORKDIR /app
 
-# Copy built JAR
-COPY target/*.jar app.jar
+# Copy the Spring Boot jar built by Maven
+COPY target/demo-0.0.1-SNAPSHOT.jar app.jar
 
-# Expose Spring Boot default port
+# Expose port 9090
 EXPOSE 9090
 
-# Run Spring Boot app
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Run the jar
+ENTRYPOINT ["java","-jar","/app/app.jar","--server.port=9090"]
